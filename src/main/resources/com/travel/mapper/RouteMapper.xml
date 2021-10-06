@@ -12,4 +12,8 @@
         </if>
     </select>
 
+    <select id="findOne" parameterType="java.lang.Integer" resultType="route">
+        select * from tab_route where rid = #{rid}
+    </select>
+
 </mapper>

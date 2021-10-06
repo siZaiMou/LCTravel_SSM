@@ -28,4 +28,13 @@ public class RouteController
         PageInfo pageInfo = new PageInfo(routes);
         return pageInfo;
     }
+
+    @RequestMapping("/findOne")
+    @ResponseBody
+    public Route findOne(@RequestParam(name="rid",required = true,defaultValue = "0")int rid)
+    {
+        Route route = routeService.findOne(rid);
+
+        return route;
+    }
 }

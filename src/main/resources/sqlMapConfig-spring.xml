@@ -11,6 +11,8 @@
         <typeAlias type="com.travel.domain.User" alias="user"></typeAlias>
         <typeAlias type="com.travel.domain.Category" alias="category"></typeAlias>
         <typeAlias type="com.travel.domain.Route" alias="route"></typeAlias>
+        <typeAlias type="com.travel.domain.RouteImg" alias="routeImg"></typeAlias>
+        <typeAlias type="com.travel.domain.Seller" alias="seller"></typeAlias>
     </typeAliases>
 
     <plugins>
@@ -23,6 +25,9 @@
         <mapper resource="com/travel/mapper/UserMapper.xml"></mapper>
         <mapper resource="com/travel/mapper/CategoryMapper.xml"></mapper>
         <mapper resource="com/travel/mapper/RouteMapper.xml"></mapper>
+        <mapper resource="com/travel/mapper/RouteImgMapper.xml"></mapper>
+        <mapper resource="com/travel/mapper/FavoriteMapper.xml"></mapper>
+        <mapper resource="com/travel/mapper/SellerMapper.xml"></mapper>
     </mappers>
 
 </configuration>

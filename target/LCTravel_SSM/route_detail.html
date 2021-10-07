@@ -41,7 +41,7 @@
                 <div class="pros_price">
                     <p class="price"><strong id="price">¥2699.00</strong><span>起</span></p>
                     <p class="collect">
-                        <a class="btn" id="favorite" onclick="addFavorite();"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>
+                        <a class="btn" id="favorite"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>
 
                         <!--<a  class="btn already" disabled="disabled"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>-->
                         <span id="favoriteCount">已收藏0次</span>
@@ -197,9 +197,17 @@
         {
             if(flag)
             {
-                $("#favorite").addClass("already");
-                $("#favorite").attr("disabled","disabled");
-                $("#favorite").removeAttr("onclick");
+                $("#favorite").html("取消收藏");
+                $("#favorite").click(function()
+                {
+                    $.get("/user/delFavorite",{rid:getParameter("rid")})
+                    location.reload();
+                });
+            }
+            else
+            {
+                $("#favorite").html("点击收藏");
+                $("#favorite").click(addFavorite);
             }
         })
     });

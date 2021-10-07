@@ -31,6 +31,14 @@ public class FavoriteServiceImpl implements FavoriteService
     }
 
     @Override
+    public void delFavorite(int rid, int uid)
+    {
+        favoriteMapper.delete(rid,uid);
+        int count = favoriteMapper.findCountByRid(rid);
+        routeMapper.updateCountByRid(rid,count);
+    }
+
+    @Override
     public boolean isFavorite(int rid, int uid)
     {
         return favoriteMapper.findByRidAndUid(rid,uid)!=null;

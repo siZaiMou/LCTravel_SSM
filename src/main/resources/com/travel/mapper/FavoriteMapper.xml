@@ -4,12 +4,16 @@
 <mapper namespace="com.travel.mapper.FavoriteMapper">
 
     <select id="findCountByRid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-        select count(*) from tab_favorite where rid = #{rid}
+        select count(*) from tab_favorite where rid = #{rid} order by date desc
     </select>
 
     <insert id="add">
         insert into tab_favorite(rid,date,uid) values(#{rid},#{date},#{uid})
     </insert>
+
+    <delete id="delete">
+        delete from tab_favorite where rid=#{rid} and uid=#{uid}
+    </delete>
 
     <select id="findByRidAndUid" resultType="favorite">
         select * from tab_favorite where rid = #{rid} and uid = #{uid}

@@ -19,11 +19,24 @@
         <script>
             $(function ()
             {
+                $.get("/user/findOne",{},function (user)
+                {
+                    if(user)
+                    {
+
+                    }
+                    else
+                    {
+                        alert("您尚未登录,请先登录!");
+                        location.href="login.html";
+                    }
+                })
                 load(1);
             });
 
             function load(currentPage)
             {
+
                 $.get("/user/userFavorite",{currentPage:currentPage},function (pb)
                 {
                     var lis='';

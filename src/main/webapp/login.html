@@ -21,6 +21,14 @@
 	<script>
 		$(function ()
 		{
+			$.get("/user/findOne",{},function (user)
+			{
+				if(user)
+				{
+					alert("您已登录，无需重复登录!");
+					location.href="index.html";
+				}
+			});
 			$("#btn_sub").click(function ()
 			{
 				$.post("/user/login",$("#loginForm").serialize(),function (data)
@@ -34,7 +42,7 @@
 						$("#errorMsg").html(data.errorMsg);
 					}
 				})
-			})
+			});
 		})
 	</script>
 </head>
@@ -59,7 +67,7 @@
 				<form id="loginForm" action="" method="post" accept-charset="utf-8">
         			<input type="hidden" name="action" value="login"/>
 					<input name="username" type="text" placeholder="请输入用户名" autocomplete="off">
-        			<input name="password" type="text" placeholder="请输入密码" autocomplete="off">
+        			<input name="password" type="password" placeholder="请输入密码" autocomplete="off">
         			<div class="verify">
 					<input name="check" type="text" placeholder="请输入验证码" autocomplete="off">
 					<span><img src="CheckCode" alt="" onclick="changeCheckCode(this)"></span>
@@ -69,13 +77,13 @@
 							img.src="CheckCode?"+new Date().getTime();
 						}
 					</script>
-			</div>
-			<div class="submit_btn">
+					</div>
+					<div class="submit_btn">
+						<div class="auto_login">
+							<input type="checkbox" name="autoLogin" class="checkbox">
+							<span>自动登录</span>
+						</div>
         				<button type="button" id="btn_sub">登录</button>
-        				<div class="auto_login">
-        					<input type="checkbox" name="" class="checkbox">
-        					<span>自动登录</span>
-        				</div>        				
         			</div>        			       		
         		</form>
         		<div class="reg">没有账户？<a href="/register.html">立即注册</a></div>

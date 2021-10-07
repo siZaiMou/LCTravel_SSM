@@ -8,6 +8,7 @@
         from tab_user
         where username = #{username}
           and password = #{password}
+          or uid = #{uid}
     </select>
 
     <select id="findByUsername" parameterType="java.lang.String" resultType="user">

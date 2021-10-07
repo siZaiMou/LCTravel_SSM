@@ -12,7 +12,10 @@ public interface FavoriteMapper
 
     void add(@Param("rid") int rid, @Param("date") Date date, @Param("uid") int uid);
 
+    void delete(@Param("rid") int rid, @Param("uid") int uid);
+
     Favorite findByRidAndUid(@Param("rid") int rid, @Param("uid") int uid);
 
     List<Integer> finByUid(int uid);
+
 }

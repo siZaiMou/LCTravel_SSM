@@ -7,4 +7,16 @@
         select count(*) from tab_favorite where rid = #{rid}
     </select>
 
+    <insert id="add">
+        insert into tab_favorite(rid,date,uid) values(#{rid},#{date},#{uid})
+    </insert>
+
+    <select id="findByRidAndUid" resultType="favorite">
+        select * from tab_favorite where rid = #{rid} and uid = #{uid}
+    </select>
+
+    <select id="finByUid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select rid from tab_favorite where uid = #{uid}
+    </select>
+
 </mapper>

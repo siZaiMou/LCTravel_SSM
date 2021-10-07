@@ -13,6 +13,7 @@
         <typeAlias type="com.travel.domain.Route" alias="route"></typeAlias>
         <typeAlias type="com.travel.domain.RouteImg" alias="routeImg"></typeAlias>
         <typeAlias type="com.travel.domain.Seller" alias="seller"></typeAlias>
+        <typeAlias type="com.travel.domain.Favorite" alias="favorite"></typeAlias>
     </typeAliases>
 
     <plugins>

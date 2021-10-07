@@ -1,16 +1,25 @@
 package com.travel.web.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.travel.domain.Favorite;
 import com.travel.domain.ResultInfo;
+import com.travel.domain.Route;
 import com.travel.domain.User;
+import com.travel.service.FavoriteService;
 import com.travel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -18,6 +27,9 @@ public class UserController
 {
     @Autowired
     UserService userService;
+
+    @Autowired
+    FavoriteService favoriteService;
 
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
     @ResponseBody
@@ -115,5 +127,32 @@ public class UserController
     {
         session.invalidate();
         return "redirect: /login.html";
+    }
+
+    @RequestMapping("/addFavorite")
+    @ResponseBody
+    public void addFavorite(@RequestParam(name="rid")int rid , HttpSession session)
+    {
+        User user = (User) session.getAttribute("user");
+        if(user==null)
+        {
+            return;
+        }
+        favoriteService.addFavorite(rid,user.getUid());
+    }
+
+    @RequestMapping("/userFavorite")
+    @ResponseBody
+    public PageInfo<Route> userFavorite(HttpServletRequest request, HttpServletResponse response, @RequestParam(name="currentPage",required = false,defaultValue = "1")int currentPage, @RequestParam(name="pageSize",required = false,defaultValue = "4")int pageSize, HttpSession session) throws IOException
+    {
+        User user = (User) session.getAttribute("user");
+        if(user==null)
+        {
+            response.sendRedirect(request.getContextPath()+"/login.jsp");
+            return null;
+        }
+        List<Route> routeList = favoriteService.userFavorite(user.getUid(),currentPage,pageSize);
+        PageInfo<Route> pageInfo = new PageInfo<>(routeList);
+        return pageInfo;
     }
 }

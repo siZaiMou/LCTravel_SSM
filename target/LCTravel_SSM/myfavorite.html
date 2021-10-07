@@ -24,7 +24,7 @@
 
             function load(currentPage)
             {
-                $.get("/route/userFavorite",{currentPage:currentPage},function (pb)
+                $.get("/user/userFavorite",{currentPage:currentPage},function (pb)
                 {
                     var lis='';
                     lis+='<li onclick="javascript:load(1)"><a href="javascript:void(0)">首页</a></li>';

@@ -16,4 +16,18 @@
         select * from tab_route where rid = #{rid}
     </select>
 
+    <update id="updateCountByRid">
+        update tab_route set count = #{newCount} where rid = #{rid}
+    </update>
+
+    <select id="findByRids" resultType="route">
+        select * from tab_route where rid in
+        <foreach collection="ridList" item="rid" open="(" separator="," close=")">
+            #{rid}
+        </foreach>
+    </select>
+
+    <select id="findRoutesByRank" resultType="route">
+        select * from tab_route order by count desc
+    </select>
 </mapper>

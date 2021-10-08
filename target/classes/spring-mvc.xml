@@ -19,4 +19,5 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 <!--    </bean>-->
     <!--    开放静态资源访问权限-->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
+
 </beans>

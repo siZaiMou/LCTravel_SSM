@@ -22,6 +22,15 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="username" value="${druid.username}"></property>
         <property name="password" value="${druid.password}"></property>
     </bean>
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="404"></property>
+        <property name="exceptionMappings">
+            <map>
+                <entry key="ResourceNotFoundException" value="500"></entry>
+                <entry key="java.lang.ArithmeticException" value="500"></entry>
+            </map>
+        </property>
+    </bean>
     <!--    配置SessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
